@@ -80,10 +80,8 @@ typedef enum {
                                           /* An example of remote presentation is Wifi Display */
                                           /*  where a dongle attached to a TV can be used to   */
                                           /*  play the mix captured by this audio source.      */
-//#ifdef QCOM_FM_ENABLED
     AUDIO_SOURCE_FM_RX               = 9,
     AUDIO_SOURCE_FM_RX_A2DP          = 10,
-//#endif
     AUDIO_SOURCE_CNT,
     AUDIO_SOURCE_MAX                 = AUDIO_SOURCE_CNT - 1,
     AUDIO_SOURCE_HOTWORD             = 1999, /* A low-priority, preemptible audio source for
@@ -397,7 +395,6 @@ enum {
     AUDIO_DEVICE_OUT_ANC_HEADSET               = 0x10000,
     AUDIO_DEVICE_OUT_ANC_HEADPHONE             = 0x20000,
     AUDIO_DEVICE_OUT_PROXY                     = 0x40000,
-
 #ifdef QCOM_HARDWARE
     AUDIO_DEVICE_OUT_FM                        = 0x80000,
     AUDIO_DEVICE_OUT_FM_TX                     = 0x100000,
@@ -451,6 +448,8 @@ enum {
     AUDIO_DEVICE_IN_DGTL_DOCK_HEADSET     = AUDIO_DEVICE_BIT_IN * 0x400,
     AUDIO_DEVICE_IN_USB_ACCESSORY         = AUDIO_DEVICE_BIT_IN * 0x800,
     AUDIO_DEVICE_IN_USB_DEVICE            = AUDIO_DEVICE_BIT_IN * 0x1000,
+    AUDIO_DEVICE_IN_ANC_HEADSET           = AUDIO_DEVICE_BIT_IN | 0x2000,
+    AUDIO_DEVICE_IN_PROXY                 = AUDIO_DEVICE_BIT_IN | 0x4000,
     AUDIO_DEVICE_IN_DEFAULT               = AUDIO_DEVICE_IN_BUILTIN_MIC,
 #else
     AUDIO_DEVICE_IN_COMMUNICATION         = AUDIO_DEVICE_BIT_IN | 0x1,
@@ -833,3 +832,4 @@ typedef enum {
 __END_DECLS
 
 #endif  // ANDROID_AUDIO_CORE_H
+
