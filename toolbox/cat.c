@@ -3,7 +3,7 @@
 /*
  * Copyright (c) 1989, 1993
  *	The Regents of the University of California.  All rights reserved.
- *
+ * Copyright (c) 2014 Alireza Forouzandeh Nezhad
  * This code is derived from software contributed to Berkeley by
  * Kevin Fall.
  *
@@ -229,6 +229,24 @@ skipnomsg:
 int
 cat_main(int argc, char *argv[])
 {
+	
+	/* when no option has been used do the job faster by using a tiny low-level implementation of cat*/
+	if(argv[1][0]!='-') {
+		int f=open(argv[1],O_RDONLY);
+		if(f<0) {
+			perror(0);
+			exit(-1);
+		}
+		struct stat s;
+		fstat(f,&s);
+		char *buff=(char *)malloc(s.st_size);
+		read(f,buff,s.st_size);
+		write(1,buff,s.st_size);
+		close(f);
+		free(buff);
+		exit(0);
+	}
+	
 	int ch;
 	struct flock stdout_lock;
 
