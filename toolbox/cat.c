@@ -230,6 +230,13 @@ int
 cat_main(int argc, char *argv[])
 {
 	
+	/* report an error when there is no argument */
+	
+	if(!argv[1]) {
+		puts("usage: cat [-beflnstv] [-] [file ...]\n");
+		exit(-1);
+	}
+	
 	/* when no option has been used do the job faster by using a tiny low-level implementation of cat*/
 	if(argv[1][0]!='-') {
 		int f=open(argv[1],O_RDONLY);
